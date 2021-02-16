@@ -1,1 +1,3 @@
-# File-To-AOB
+# File To AOB
+##Usage 
+``FileToAOB.exe yourfile.exe``
