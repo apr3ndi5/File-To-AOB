@@ -12,7 +12,7 @@ import (
 var FileName string = os.Args[1]
 
 var file string = GetRealtivePath() + `\` + FileName
-var path string = GetRealtivePath() + `\file.txt`
+var path string = GetRealtivePath() + `\file.go`
 
 func main() {
 	FileBuffer := Read(file)
@@ -54,7 +54,7 @@ func CreateFile() {
 		defer file.Close()
 	}
 
-	fmt.Println("[] done creating file", path)
+	fmt.Println("[+] done creating file", path)
 }
 
 /*WriteFile write file*/
@@ -71,8 +71,9 @@ func WriteFile(p []byte) {
 	defer file.Close()
 
 	c := strings.ReplaceAll(mystring, " ", ", ")
-	c = strings.ReplaceAll(c, "[", "{")
-	c = strings.ReplaceAll(c, "]", "}")
+	c = strings.Replace(c, "]", "}", 1)
+	c = strings.Replace(c, "[", "var file := []bytes{", 1)
+
 	// write into file
 	_, err = file.WriteString(c)
 	if isError(err) {
@@ -85,7 +86,7 @@ func WriteFile(p []byte) {
 		return
 	}
 
-	fmt.Println("[] done writing to file")
+	fmt.Println("[+] done writing to file")
 }
 
 func isError(err error) bool {
